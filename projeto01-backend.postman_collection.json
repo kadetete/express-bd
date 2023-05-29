@@ -47,11 +47,20 @@
 		{
 			"name": "POST digimon",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome_digi\": \"Agumon\",\r\n    \"nivel\": \"Criança\",\r\n    \"tipo\": \"Vaccine\",\r\n    \"evolucao\": \"Greymon\"\r\n}",
+					"raw": "{\r\n    \"nome_digi\": \"Agumon\",\r\n    \"nivel\": \"Criança\",\r\n    \"tipo\": \"Reptil\",\r\n    \"evolucao\": \"Angemon\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
