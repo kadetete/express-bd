@@ -46,6 +46,7 @@ CREATE TABLE `tbdigimon` (
 CREATE TABLE `tbusuario` (
   `idUsuario` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `senha` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

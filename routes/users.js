@@ -22,9 +22,11 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   const usuario = req.body.usuario;
   const senha = req.body.senha;
-  const sql = 'INSERT INTO tbusuario(usuario, senha) VALUES (?, ?)'
+  const email = req.body.email;
+
+  const sql = 'INSERT INTO tbusuario(usuario, email, senha) VALUES (?, ?)'
   con.query(sql, 
-    [usuario, senha], 
+    [usuario, email, senha], 
     function(erroConexaoSQL, result, fields) {
       if (erroConexaoSQL) {
         throw erroConexaoSQL;
@@ -40,10 +42,11 @@ router.post('/', function(req, res) {
 router.put('/:idUsuario', function(req, res) {
   const idUsuario = req.params.idUsuario;
   const usuario = req.body.usuario;
+  const email = req.body.email;
   const senha = req.body.senha;
 
-  const sql = 'UPDATE tbusuario SET usuario = ?, senha = ? WHERE idUsuario = ?';
-  con.query(sql, [usuario, senha, idUsuario], function(erroConexaoSQL, result, fields) {
+  const sql = 'UPDATE tbusuario SET usuario = ?, email = ?, senha = ? WHERE idUsuario = ?';
+  con.query(sql, [usuario, email, senha, idUsuario], function(erroConexaoSQL, result, fields) {
     if (erroConexaoSQL) {
       throw erroConexaoSQL;
     }

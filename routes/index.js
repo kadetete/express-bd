@@ -18,7 +18,7 @@ con.connect((erroConexao) => {
 });
 
 // metodo de autenticacao 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
   const idUsuario = req.body.idUsuario;
   const usuario = req.body.usuario;
   const sql = 'SELECT * FROM tbusuario WHERE idUsuario = ? AND usuario = ?';
@@ -58,10 +58,5 @@ function verificarToken(req, res, next) {
   }
 }
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
 module.exports = router;
