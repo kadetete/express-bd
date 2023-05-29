@@ -12,17 +12,16 @@ var con = mysql.createConnection({
 
 // metodo de autenticacao 
 router.post('/login', (req, res) => {
-  const idUsuario = req.body.idUsuario;
   const usuario = req.body.usuario;
   const senha = req.body.senha;
-  const sql = 'SELECT * FROM tbusuario WHERE idUsuario = ? AND usuario = ?';
-  con.query(sql, [idUsuario, usuario], (erroComandoSQL, result, fields) => {
+  const sql = 'SELECT usuario, senha FROM tbusuario WHERE usuario = ?';
+  con.query(sql, [usuario], (erroComandoSQL, result, fields) => {
     if (erroComandoSQL) {
       throw erroComandoSQL;
     } else {
       if (result.length > 0) {
         //const nome = result[0].usuario;
-        const token = jwt.sign({ idUsuario: idUsuario, usuario: usuario, senha: senha}, {
+        const token = jwt.sign({usuario: usuario}, senha, {
           expiresIn: 60 * 10, // expires in 5min (300 segundos ==> 5 x 60)
         });
         res.json({ auth: true, token: token });
@@ -67,7 +66,7 @@ router.post('/', function(req, res) {
   const senha = req.body.senha;
   const email = req.body.email;
 
-  const sql = 'INSERT INTO tbusuario(usuario, email, senha) VALUES (?, ?)'
+  const sql = 'INSERT INTO tbusuario(usuario, email, senha) VALUES (?, ?, ?)'
   con.query(sql, 
     [usuario, email, senha], 
     function(erroConexaoSQL, result, fields) {
