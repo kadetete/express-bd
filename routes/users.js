@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 const jwt = require('jsonwebtoken');
+const chavePrivada = "coisado123.com"
 
 var con = mysql.createConnection({
   host: 'localhost',
@@ -21,8 +22,8 @@ router.post('/login', (req, res) => {
     } else {
       if (result.length > 0) {
         //const nome = result[0].usuario;
-        const token = jwt.sign({usuario: usuario}, senha, {
-          expiresIn: 60 * 10, // expires in 5min (300 segundos ==> 5 x 60)
+        const token = jwt.sign({usuario: usuario, senha: senha}, chavePrivada, {
+          expiresIn: 60 * 10, // expires in 10 min
         });
         res.json({ auth: true, token: token });
       } else {
@@ -40,11 +41,11 @@ function verificarToken(req, res, next) {
       message: 'Nenhum token de autenticação informado.',
     });
   } else {
-    jwt.verify(token, senha, function (err, decoded) {
+    jwt.verify(token, chavePrivada, function (err, decoded) {
       if (err) {
         res.status(500).json({ auth: false, message: 'Token inválido.' });
       } else {
-        console.log('Metodo acessado por ' + decoded.nome);
+        console.log('Metodo acessado por ' + decoded.usuario);
         next();
       }
     });
