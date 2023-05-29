@@ -40,7 +40,7 @@ function verificarToken(req, res, next) {
       message: 'Nenhum token de autenticação informado.',
     });
   } else {
-    jwt.verify(token, MinhaSenha, function (err, decoded) {
+    jwt.verify(token, senha, function (err, decoded) {
       if (err) {
         res.status(500).json({ auth: false, message: 'Token inválido.' });
       } else {
