@@ -17,7 +17,7 @@ con.connect((erroConexao) => {
   }
 });
 
-// metodo de autenticacao
+// metodo de autenticacao 
 app.post('/login', (req, res) => {
   const idUsuario = req.body.idUsuario;
   const usuario = req.body.usuario;
